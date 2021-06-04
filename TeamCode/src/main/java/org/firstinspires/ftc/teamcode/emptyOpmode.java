@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Config
 @TeleOp(name="emptyOpmode")
-//@Disabled
+@Disabled
 
 public class emptyOpmode extends LinearOpMode
 {

@@ -21,7 +21,8 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 
 @TeleOp(name = "Concept: TensorFlow Object Detection Webcam", group = "Concept")
-@Disabled
+//@Disabled
+//@Disabled
 public class TFODTest extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
