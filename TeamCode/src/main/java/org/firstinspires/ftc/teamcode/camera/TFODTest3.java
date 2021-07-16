@@ -15,15 +15,15 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 
-@TeleOp(name = "TFODObjectSize", group = "Concept")
+@TeleOp(name = "TFODTest3", group = "Concept")
 //@Disabled
-public class TFODObjectSize extends LinearOpMode {
+//@Disabled
+public class TFODTest3 extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     private static final String LABEL_SILVER_MINERAL = "Silver Mineral";
@@ -34,19 +34,10 @@ public class TFODObjectSize extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    Recognition recognition;
-
     @Override
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
-
-        List<Recognition> recognitions;
-        double[] angle = {};
-        double[] height_width = {};
-        int index;
-        int i;
-
         initVuforia();
 
         initTfod();
@@ -57,6 +48,9 @@ public class TFODObjectSize extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
+            if (tfod != null) {
+                tfod.activate();
+            }
 
             while (opModeIsActive()) {
                 if (tfod != null) {
@@ -65,27 +59,33 @@ public class TFODObjectSize extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
-
-                        index = 0;
-
-                        for (Recognition recognition : updatedRecognitions) {
-                            angle [index] = recognition.estimateAngleToObject(AngleUnit.DEGREES);
-                            height_width [index] = recognition.getHeight() / recognition.getWidth();
-                            index++;
-                        }
-
-                        i = 0;
-
-                        while (index != i) {
-                            telemetry.addData("object " + index + " angle = ", angle[i]);
-                            telemetry.addData("object " + index + " height_width = ", height_width[i]);
-                            i++;
-                        }
-
+                        //if (updatedRecognitions.size() == 3) {
+                            /**int goldMineralX = -1;
+                            int silverMineral1X = -1;
+                            int silverMineral2X = -1;**/
+                            for (Recognition recognition : updatedRecognitions) {
+                                double height = recognition.getHeight();
+                                telemetry.addData("Gold mineral distance to top", height);
+                                /**if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
+                                    goldMineralX = (int) recognition.getLeft();
+                                } else if (silverMineral1X == -1) {
+                                    silverMineral1X = (int) recognition.getLeft();
+                                } else {
+                                    silverMineral2X = (int) recognition.getLeft();
+                                }**/
+                            }
+                            /**if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+                                if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+                                    telemetry.addData("Gold Mineral Position", "Left");
+                                } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
+                                    telemetry.addData("Gold Mineral Position", "Right");
+                                } else {
+                                    telemetry.addData("Gold Mineral Position", "Center");
+                                }
+                            }**/
+                        //}
                         telemetry.update();
                     }
-
-                    while (opModeIsActive()) {}
                 }
             }
         }

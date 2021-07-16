@@ -21,9 +21,10 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 
-@TeleOp(name = "TFODObjectSize", group = "Concept")
+@TeleOp(name = "TFODTest4", group = "Concept")
 //@Disabled
-public class TFODObjectSize extends LinearOpMode {
+//@Disabled
+public class TFODTest4 extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     private static final String LABEL_SILVER_MINERAL = "Silver Mineral";
@@ -34,19 +35,9 @@ public class TFODObjectSize extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    Recognition recognition;
-
     @Override
     public void runOpMode() {
-        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
-        // first.
-
-        List<Recognition> recognitions;
-        double[] angle = {};
-        double[] height_width = {};
-        int index;
-        int i;
-
+        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that first.
         initVuforia();
 
         initTfod();
@@ -57,35 +48,30 @@ public class TFODObjectSize extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
+            if (tfod != null) {
+                tfod.activate();
+            }
 
             while (opModeIsActive()) {
                 if (tfod != null) {
-                    // getUpdatedRecognitions() will return null if no new information is available since
-                    // the last time that call was made.
+                    // getUpdatedRecognitions() will return null if no new information is available since the last time that call was made.
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
-
-                        index = 0;
-
-                        for (Recognition recognition : updatedRecognitions) {
-                            angle [index] = recognition.estimateAngleToObject(AngleUnit.DEGREES);
-                            height_width [index] = recognition.getHeight() / recognition.getWidth();
-                            index++;
-                        }
-
-                        i = 0;
-
-                        while (index != i) {
-                            telemetry.addData("object " + index + " angle = ", angle[i]);
-                            telemetry.addData("object " + index + " height_width = ", height_width[i]);
-                            i++;
-                        }
-
+                        
+                            for (Recognition recognition : updatedRecognitions) {
+                                double angle = recognition.estimateAngleToObject(AngleUnit.DEGREES);
+                                double height = recognition.getHeight();
+                                double width = recognition.getWidth();
+                              
+                                telemetry.addData("pixle height", height);
+                                telemetry.addData("pixle width", width);
+                                telemetry.addData("angle in degrees", angle);
+                                
+                            }
+                            
                         telemetry.update();
                     }
-
-                    while (opModeIsActive()) {}
                 }
             }
         }
