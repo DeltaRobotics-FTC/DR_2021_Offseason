@@ -10,6 +10,7 @@
 package org.firstinspires.ftc.teamcode.camera;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -20,11 +21,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 
 
-@TeleOp(name = "TFODTest5", group = "Concept")
+@TeleOp(name = "TFODTest7", group = "Concept")
 //@Disabled
-public class TFODTest5 extends LinearOpMode {
+public class TFODTest7 extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     private static final String LABEL_SILVER_MINERAL = "Silver Mineral";
@@ -56,6 +58,18 @@ public class TFODTest5 extends LinearOpMode {
     private double CameraDistanceHypot;
     private double CameraDistanceY;
 
+    private double RobotDistanceX;
+    private double RobotDistanceY;
+
+    private double objectDistance;
+    private double objectAngleRadians;
+
+    private double objectFieldLocationX;
+    private double objectFieldLocationY;
+
+    private double picLocationX;
+    private double picLocationY;
+    private double picLocationHeading;
 
     @Override
     public void runOpMode() {
@@ -66,6 +80,7 @@ public class TFODTest5 extends LinearOpMode {
 
         FtcDashboard.getInstance().startCameraStream(vuforia, 0);
 
+        StandardTrackingWheelLocalizer localizer = new StandardTrackingWheelLocalizer(hardwareMap);
 
         telemetry.addData(">", "Press Play to start tracking");
         telemetry.update();
@@ -83,24 +98,46 @@ public class TFODTest5 extends LinearOpMode {
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-
+                        picLocationX = localizer.getPoseEstimate().getX();
+                        picLocationY = localizer.getPoseEstimate().getY();
+                        picLocationHeading = localizer.getPoseEstimate().getHeading();
 
                         for (Recognition recognition : updatedRecognitions) {
+                            //get recognition's stats
                             ObjectHeight = recognition.getHeight();
                             ObjectWidth = recognition.getWidth();
                             ObjectLeft = recognition.getLeft();
                             ObjectBottom = recognition.getBottom();
 
+                            //find the recognition's angle vertically and horizontally
                             ObjectAngleVerticle = ((ObjectBottom + (ObjectHeight/2) - (VerticlePixels/2)) * VerticalAnglePerPixel) + CameraAngle;
                             ObjectAngleHorizontal = ((ObjectLeft + (ObjectWidth/2) - (HorizontalPixels/2)) * HorizontalAnglePerPixel);
 
+                            //find the location of recognition relletive to the camera
                             CameraDistanceX = Math.tan(Math.toRadians(ObjectAngleVerticle)) * CameraHeight;
                             CameraDistanceHypot = CameraHeight / Math.cos(Math.toRadians(ObjectAngleVerticle));
                             CameraDistanceY = Math.tan(Math.toRadians(ObjectAngleHorizontal)) * CameraDistanceHypot;
 
                             //Y negative to the left, X always positive
-                            telemetry.addData("X distance from the camera", CameraDistanceX);
-                            telemetry.addData("Y distance from the camera", CameraDistanceY);
+                            //telemetry.addData("X distance from the camera", CameraDistanceX);
+                            //telemetry.addData("Y distance from the camera", CameraDistanceY);
+
+                            //find the location of recognition reletive to the robots odometry center
+                            RobotDistanceX = CameraLocationX + CameraDistanceX;
+                            RobotDistanceY = CameraLocationY + CameraDistanceY;
+
+                            //telemetry.addData("X distance from the robot center", RobotDistanceX);
+                            //telemetry.addData("Y distance from the robot center", RobotDistanceY);
+
+                            //find recognitions location on the field
+                            objectDistance = Math.hypot(RobotDistanceX, RobotDistanceY);
+                            objectAngleRadians = Math.atan(RobotDistanceX / RobotDistanceY) + picLocationHeading;
+
+                            objectFieldLocationX = (Math.acos(objectAngleRadians) * objectDistance) + picLocationX;
+                            objectFieldLocationY = (Math.asin(objectAngleRadians) * objectDistance) + picLocationY;
+
+                            telemetry.addData("X field location", objectFieldLocationX);
+                            telemetry.addData("Y field location", objectFieldLocationY);
 
                         }
 

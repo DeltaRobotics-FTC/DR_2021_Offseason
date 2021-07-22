@@ -9,6 +9,7 @@
 
 package org.firstinspires.ftc.teamcode.camera;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -66,6 +67,8 @@ public class TFODTest6 extends LinearOpMode {
 
         initTfod();
 
+        FtcDashboard.getInstance().startCameraStream(vuforia, 0);
+
 
         telemetry.addData(">", "Press Play to start tracking");
         telemetry.update();
@@ -94,9 +97,9 @@ public class TFODTest6 extends LinearOpMode {
                             ObjectAngleVerticle = ((ObjectBottom + (ObjectHeight/2) - (VerticlePixels/2)) * VerticalAnglePerPixel) + CameraAngle;
                             ObjectAngleHorizontal = ((ObjectLeft + (ObjectWidth/2) - (HorizontalPixels/2)) * HorizontalAnglePerPixel);
 
-                            CameraDistanceX = Math.tan(ObjectAngleVerticle) * CameraHeight;
-                            CameraDistanceHypot = CameraHeight / Math.cos(ObjectAngleVerticle);
-                            CameraDistanceY = Math.tan(ObjectAngleHorizontal) * CameraDistanceHypot;
+                            CameraDistanceX = Math.tan(Math.toRadians(ObjectAngleVerticle)) * CameraHeight;
+                            CameraDistanceHypot = CameraHeight / Math.cos(Math.toRadians(ObjectAngleVerticle));
+                            CameraDistanceY = Math.tan(Math.toRadians(ObjectAngleHorizontal)) * CameraDistanceHypot;
 
                             //Y negative to the left, X always positive
                             //telemetry.addData("X distance from the camera", CameraDistanceX);
