@@ -20,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.teamcode.R;
 
 
 @TeleOp(name = "TFODTest5", group = "Concept")
@@ -35,14 +36,14 @@ public class TFODTest5 extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    private static double CameraHeight = 8;
+    private static double CameraHeight = 8.25;
     private static double CameraAngle = 45;
     private static double VerticlePixels = 720;
     private static double HorizontalPixels = 1280;
     private static double VerticalAnglePerPixel = 0.05854859;
     private static double HorizontalAnglePerPixel = 0.05391957;
-    private static double CameraLocationX = 0;
-    private static double CameraLocationY = 0;
+    //private static double CameraLocationX = 0;
+    //private static double CameraLocationY = 0;
 
     private double ObjectHeight;
     private double ObjectWidth;
@@ -64,7 +65,7 @@ public class TFODTest5 extends LinearOpMode {
 
         initTfod();
 
-        FtcDashboard.getInstance().startCameraStream(vuforia, 0);
+        FtcDashboard.getInstance().startCameraStream(vuforia, 100);
 
 
         telemetry.addData(">", "Press Play to start tracking");
@@ -91,8 +92,8 @@ public class TFODTest5 extends LinearOpMode {
                             ObjectLeft = recognition.getLeft();
                             ObjectBottom = recognition.getBottom();
 
-                            ObjectAngleVerticle = ((ObjectBottom + (ObjectHeight/2) - (VerticlePixels/2)) * VerticalAnglePerPixel) + CameraAngle;
-                            ObjectAngleHorizontal = ((ObjectLeft + (ObjectWidth/2) - (HorizontalPixels/2)) * HorizontalAnglePerPixel);
+                            ObjectAngleVerticle = -((ObjectBottom + (ObjectHeight/2) - (VerticlePixels/2)) * VerticalAnglePerPixel) + CameraAngle;
+                            ObjectAngleHorizontal = ((ObjectLeft + (ObjectWidth/2) - (720/2)) * VerticalAnglePerPixel);
 
                             CameraDistanceX = Math.tan(Math.toRadians(ObjectAngleVerticle)) * CameraHeight;
                             CameraDistanceHypot = CameraHeight / Math.cos(Math.toRadians(ObjectAngleVerticle));
@@ -120,7 +121,7 @@ public class TFODTest5 extends LinearOpMode {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
