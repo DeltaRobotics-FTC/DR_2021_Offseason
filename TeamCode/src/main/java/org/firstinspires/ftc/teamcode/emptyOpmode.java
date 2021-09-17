@@ -27,6 +27,8 @@ public class emptyOpmode extends LinearOpMode
         FtcDashboard dashboard = FtcDashboard.getInstance();
         //telemetry = dashboard.getTelemetry();
 
+        RobotHardware robot = new RobotHardware(hardwareMap);
+
         //SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         ElapsedTime whatever = new ElapsedTime();
@@ -38,5 +40,18 @@ public class emptyOpmode extends LinearOpMode
 
         }
     }
-}
 
+    void forward (int distance, double power) {
+        RobotHardware robot = new RobotHardware(hardwareMap);
+
+        robot.motorLB.setTargetPosition(distance);
+
+        robot.motorLB.setPower(power);
+
+        robot.motorLB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+}
+//robot.wobble.setTargetPosition(upPosition);
+//                robot.wobble.setPower(0.7);
+//                robot.wobble.setMode(DcMotor.RunMode.RUN_TO_POSITION);

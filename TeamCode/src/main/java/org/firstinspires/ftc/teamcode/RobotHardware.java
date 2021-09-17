@@ -58,25 +58,25 @@ public class RobotHardware
         motorLB = ahwMap.dcMotor.get("motorLB");
 
         //mechanism motors
-        motor1 = ahwMap.get(DcMotorEx.class, "flywheel");
-        motor2 = ahwMap.dcMotor.get("wobble");
-        motor3 = ahwMap.get(DcMotorEx.class, "intake1");
-        motor4 = ahwMap.dcMotor.get("intake2");
+//        motor1 = ahwMap.get(DcMotorEx.class, "flywheel");
+//        motor2 = ahwMap.dcMotor.get("wobble");
+//        motor3 = ahwMap.get(DcMotorEx.class, "intake1");
+//        motor4 = ahwMap.dcMotor.get("intake2");
 
 
         //servos
-        servo = ahwMap.servo.get("servo");
-        servo2 = ahwMap.servo.get("servo2");
-        servo3 = ahwMap.servo.get("servo3");
-        servo4 = ahwMap.servo.get("servo4");
-        servo5 = ahwMap.servo.get("servo5");
-        servo6 = ahwMap.servo.get("servo6");
-        servo7 = ahwMap.servo.get("servo7");
-        servo8 = ahwMap.servo.get("servo8");
-        servo9 = ahwMap.servo.get("servo9");
-        servo10 = ahwMap.servo.get("servo10");
-        servo11 = ahwMap.servo.get("servo11");
-        servo12 = ahwMap.servo.get("servo12");
+//        servo = ahwMap.servo.get("servo");
+//        servo2 = ahwMap.servo.get("servo2");
+//        servo3 = ahwMap.servo.get("servo3");
+//        servo4 = ahwMap.servo.get("servo4");
+//        servo5 = ahwMap.servo.get("servo5");
+//        servo6 = ahwMap.servo.get("servo6");
+//        servo7 = ahwMap.servo.get("servo7");
+//        servo8 = ahwMap.servo.get("servo8");
+//        servo9 = ahwMap.servo.get("servo9");
+//        servo10 = ahwMap.servo.get("servo10");
+//        servo11 = ahwMap.servo.get("servo11");
+//        servo12 = ahwMap.servo.get("servo12");
 
         //drive motors and odometry encoders
         motorRF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -98,18 +98,18 @@ public class RobotHardware
 
 
         //servos
-        servo.setPosition(0);
-        servo2.setPosition(0);
-        servo3.setPosition(0);
-        servo4.setPosition(0);
-        servo5.setPosition(0);
-        servo6.setPosition(0);
-        servo7.setPosition(0);
-        servo8.setPosition(0);
-        servo9.setPosition(0);
-        servo10.setPosition(0);
-        servo11.setPosition(0);
-        servo12.setPosition(0);
+//        servo.setPosition(0);
+//        servo2.setPosition(0);
+//        servo3.setPosition(0);
+//        servo4.setPosition(0);
+//        servo5.setPosition(0);
+//        servo6.setPosition(0);
+//        servo7.setPosition(0);
+//        servo8.setPosition(0);
+//        servo9.setPosition(0);
+//        servo10.setPosition(0);
+//        servo11.setPosition(0);
+//        servo12.setPosition(0);
     }
 
 }

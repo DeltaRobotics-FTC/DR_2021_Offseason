@@ -39,6 +39,7 @@ public class demoBot extends LinearOpMode
         //SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         //ElapsedTime whatever = new ElapsedTime();
+        driveClass drive = new driveClass();
 
         motorRF = hardwareMap.dcMotor.get("motorRF");
         motorLF = hardwareMap.dcMotor.get("motorLF");
@@ -79,6 +80,8 @@ public class demoBot extends LinearOpMode
             else {
                 shooterMotor.setPower(0);
             }
+
+
         }
     }
 }
