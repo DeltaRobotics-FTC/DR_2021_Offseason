@@ -19,6 +19,10 @@ public class RobotHardware
     public DcMotor motorRB = null;
     public DcMotor motorLB = null;
 
+    public DcMotor leftEncoder = null;
+    public DcMotor rightEncoder = null;
+    public DcMotor perpendicularEncoder = null;
+
     //mechanism motors
     public DcMotor motor1= null;
     public DcMotor motor2 = null;
@@ -56,6 +60,12 @@ public class RobotHardware
         motorLF = ahwMap.dcMotor.get("motorLF");
         motorRB = ahwMap.dcMotor.get("motorRB");
         motorLB = ahwMap.dcMotor.get("motorLB");
+
+        motorRB = leftEncoder;
+        motorLB = rightEncoder;
+        motorRF = perpendicularEncoder;
+
+
 
         //mechanism motors
 //        motor1 = ahwMap.get(DcMotorEx.class, "flywheel");

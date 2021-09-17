@@ -81,10 +81,10 @@ public class testAuto1 extends LinearOpMode
     void forward (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(distance);
-        robot.motorLF.setTargetPosition(distance);
-        robot.motorRB.setTargetPosition(distance);
-        robot.motorRF.setTargetPosition(distance);
+        robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(power);
         robot.motorLF.setPower(power);
@@ -101,10 +101,10 @@ public class testAuto1 extends LinearOpMode
     void backwards (int distance, double power){
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(-distance);
-        robot.motorLF.setTargetPosition(-distance);
-        robot.motorRB.setTargetPosition(-distance);
-        robot.motorRF.setTargetPosition(-distance);
+        robot.motorLB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(-power);
         robot.motorLF.setPower(-power);
@@ -120,10 +120,10 @@ public class testAuto1 extends LinearOpMode
     void turnRight (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(distance);
-        robot.motorLF.setTargetPosition(distance);
-        robot.motorRB.setTargetPosition(-distance);
-        robot.motorRF.setTargetPosition(-distance);
+        robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(power);
         robot.motorLF.setPower(power);
@@ -141,10 +141,10 @@ public class testAuto1 extends LinearOpMode
     {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(-distance);
-        robot.motorLF.setTargetPosition(-distance);
-        robot.motorRB.setTargetPosition(distance);
-        robot.motorRF.setTargetPosition(distance);
+        robot.motorLB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(-power);
         robot.motorLF.setPower(-power);
@@ -160,10 +160,10 @@ public class testAuto1 extends LinearOpMode
     void strafeRight (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(-distance);
-        robot.motorLF.setTargetPosition(distance);
-        robot.motorRB.setTargetPosition(distance);
-        robot.motorRF.setTargetPosition(-distance);
+        robot.motorLB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(-power);
         robot.motorLF.setPower(power);
@@ -180,10 +180,10 @@ public class testAuto1 extends LinearOpMode
     void strafeLeft (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(distance);
-        robot.motorLF.setTargetPosition(-distance);
-        robot.motorRB.setTargetPosition(-distance);
-        robot.motorRF.setTargetPosition(distance);
+        robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(power);
         robot.motorLF.setPower(-power);
@@ -200,10 +200,10 @@ public class testAuto1 extends LinearOpMode
     void forwardRight (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        //robot.motorLB.setTargetPosition(distance);
-        robot.motorLF.setTargetPosition(distance);
-        robot.motorRB.setTargetPosition(distance);
-        //robot.motorRF.setTargetPosition(distance);
+        //robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        //robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         //robot.motorLB.setPower(power);
         robot.motorLF.setPower(power);
@@ -220,10 +220,10 @@ public class testAuto1 extends LinearOpMode
     void forwardLeft (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(distance);
-        //robot.motorLF.setTargetPosition(distance);
-        //robot.motorRB.setTargetPosition(distance);
-        robot.motorRF.setTargetPosition(distance);
+        robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        //robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        //robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(power);
         //robot.motorLF.setPower(power);
@@ -240,10 +240,10 @@ public class testAuto1 extends LinearOpMode
     void backwardsRight (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        robot.motorLB.setTargetPosition(-distance);
-        //robot.motorLF.setTargetPosition(distance);
-        //robot.motorRB.setTargetPosition(distance);
-        robot.motorRF.setTargetPosition(-distance);
+        robot.motorLB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        //robot.motorLF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        //robot.motorRB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorRF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
 
         robot.motorLB.setPower(-power);
         //robot.motorLF.setPower(power);
@@ -260,10 +260,10 @@ public class testAuto1 extends LinearOpMode
     void backwardsLeft (int distance, double power) {
         RobotHardware robot = new RobotHardware(hardwareMap);
 
-        //robot.motorLB.setTargetPosition(distance);
-        robot.motorLF.setTargetPosition(-distance);
-        robot.motorRB.setTargetPosition(-distance);
-        //robot.motorRF.setTargetPosition(distance);
+        //robot.motorLB.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
+        robot.motorLF.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        robot.motorRB.setTargetPosition(-distance+robot.motorLB.getCurrentPosition());
+        //robot.motorRF.setTargetPosition(distance+robot.motorLB.getCurrentPosition());
 
         //robot.motorLB.setPower(power);
         robot.motorLF.setPower(-power);
