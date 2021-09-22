@@ -24,8 +24,8 @@ public class RobotHardware
     public DcMotor perpendicularEncoder = null;
 
     //mechanism motors
-    public DcMotor motor1= null;
-    public DcMotor motor2 = null;
+    public DcMotor motorRM = null;
+    public DcMotor motorLM = null;
     public DcMotor motor3 = null;
     public DcMotor motor4 = null;
 
@@ -60,6 +60,8 @@ public class RobotHardware
         motorLF = ahwMap.dcMotor.get("motorLF");
         motorRB = ahwMap.dcMotor.get("motorRB");
         motorLB = ahwMap.dcMotor.get("motorLB");
+        motorRM = ahwMap.dcMotor.get("motorRM");
+        motorLM = ahwMap.dcMotor.get("motorLM");
 
         motorRB = leftEncoder;
         motorLB = rightEncoder;
@@ -93,16 +95,21 @@ public class RobotHardware
         motorLF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorRB.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorLB.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
         motorLF.setDirection(DcMotorSimple.Direction.REVERSE);
         motorLB.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorLM.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motorRF.setPower(0);
         motorLF.setPower(0);
         motorRB.setPower(0);
         motorLB.setPower(0);
+        motorRM.setPower(0);
+        motorLM.setPower(0);
 
         //mechanism motors
 
