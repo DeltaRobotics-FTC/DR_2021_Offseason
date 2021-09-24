@@ -100,9 +100,9 @@ public class RobotHardware
 
 
 
-        motorLF.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorLB.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorLM.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorRF.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorRB.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorRM.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motorRF.setPower(0);
         motorLF.setPower(0);

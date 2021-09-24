@@ -15,10 +15,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Config
-@TeleOp(name="emptyOpmode")
-@Disabled
+@TeleOp(name="SixMotorTankDrive")
 
-public class emptyOpmode extends LinearOpMode
+
+public class SixMotorTankDrive extends LinearOpMode
 {
 
     @Override
@@ -37,12 +37,12 @@ public class emptyOpmode extends LinearOpMode
 
         while (opModeIsActive())
         {
-            robot.motorRF.setPower(-gamepad1.right_stick_y);
+            robot.motorRF.setPower(-gamepad1.right_stick_y * 3/4);
             robot.motorRM.setPower(-gamepad1.right_stick_y);
-            robot.motorRB.setPower(-gamepad1.right_stick_y);
-            robot.motorLB.setPower(-gamepad1.left_stick_y);
+            robot.motorRB.setPower(-gamepad1.right_stick_y * 3/4);
+            robot.motorLB.setPower(-gamepad1.left_stick_y * 3/4);
             robot.motorLM.setPower(-gamepad1.left_stick_y);
-            robot.motorLF.setPower(-gamepad1.left_stick_y);
+            robot.motorLF.setPower(-gamepad1.left_stick_y * 3/4);
         }
     }
 }
